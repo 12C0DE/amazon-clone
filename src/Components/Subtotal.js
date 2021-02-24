@@ -5,7 +5,8 @@ import { useStateValue } from '../StateProvider';
 
 function Subtotal() {
 	const [
-		{ basket }
+		{ basket },
+		dispatch
 	] = useStateValue();
 
 	return (
@@ -14,8 +15,7 @@ function Subtotal() {
 				renderText={(value) => (
 					<React.Fragment>
 						<p>
-							Subtotal ({basket.length} items):{' '}
-							<strong>${basket.map((item) => item.price).reduce((a, b) => a + b, 0)}</strong>
+							Subtotal ({basket.length} items): <strong>{value}</strong>
 						</p>
 						<small className="subtotal_gift">
 							<input type="checkbox" />This order contains a gift
@@ -23,7 +23,8 @@ function Subtotal() {
 					</React.Fragment>
 				)}
 				decimalScale={2}
-				value={0}
+				// value={getBasketTotal(basket)}
+				value={basket.map((items) => items.price).reduce((amount, price) => price + amount, 0)}
 				displayType={'text'}
 				thousandSeparator={true}
 				prefix={'$'}
