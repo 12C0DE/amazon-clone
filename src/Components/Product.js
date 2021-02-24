@@ -1,27 +1,22 @@
-import React from 'react';
-import { useStateValue } from '../StateProvider';
+import React, { useContext } from 'react';
+import { GlobalContext } from '../Context/GlobalState';
 import '../Styles/Product.css';
 
 function Product({ id, title, image, price, rating }) {
-	const [
-		{ basket },
-		dispatch
-	] = useStateValue();
+	const { basket, addToBasket } = useContext(GlobalContext);
 
 	console.log('basket', basket);
 
-	const addToBasket = () => {
-		//dispatch the item into the data layer
-		dispatch({
-			type : 'ADD_TO_BASKET',
-			item : {
-				id     : id,
-				title  : title,
-				image  : image,
-				price  : price,
-				rating : rating
-			}
-		});
+	const addProductToBasket = () => {
+		const product = {
+			id     : id,
+			title  : title,
+			image  : image,
+			price  : price,
+			rating : rating
+		};
+
+		addToBasket(product);
 	};
 
 	return (
@@ -35,7 +30,7 @@ function Product({ id, title, image, price, rating }) {
 				<div className="product_rating">{Array(rating).fill().map((_, i) => <span>⭐</span>)}</div>
 			</div>
 			<img src={image} />
-			<button onClick={addToBasket}>Add to basket</button>
+			<button onClick={() => addProductToBasket()}>Add to basket</button>
 		</div>
 	);
 }

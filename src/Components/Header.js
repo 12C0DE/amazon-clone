@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link } from 'react-router-dom';
-import { useStateValue } from '../StateProvider';
+import { GlobalContext } from '../Context/GlobalState';
 import '../Styles/Header.css';
 
 const Header = () => {
-	const [
-		{ basket },
-		dispatch
-	] = useStateValue();
+	const { basket } = useContext(GlobalContext);
 
 	return (
 		<div className="header">

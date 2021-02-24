@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Subtotal from '../Components/Subtotal';
 import CheckoutProduct from '../Components/CheckoutProduct';
 import '../Styles/Checkout.css';
-import { useStateValue } from '../StateProvider';
+import { GlobalContext } from '../Context/GlobalState';
 
 function Checkout() {
-	const [
-		{ basket },
-		dispatch
-	] = useStateValue();
+	const { basket } = useContext(GlobalContext);
+
 	return (
 		<div className="checkout">
 			<div className="checkout_left">
@@ -20,7 +18,7 @@ function Checkout() {
 					<h2 className="checkout_title">Your shopping basket</h2>
 					{basket.map((item, index) => (
 						<CheckoutProduct
-							id={`${item.id}_${index}`}
+							id={item.id}
 							title={item.title}
 							image={item.image}
 							price={item.price}
