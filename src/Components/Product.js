@@ -5,8 +5,6 @@ import '../Styles/Product.css';
 function Product({ id, title, image, price, rating }) {
 	const { basket, addToBasket } = useContext(GlobalContext);
 
-	console.log('basket', basket);
-
 	const addProductToBasket = () => {
 		const product = {
 			id     : id,

@@ -3,7 +3,8 @@ import AppReducer from './AppReducer';
 
 //inital state
 const initialState = {
-	basket : []
+	basket : [],
+	user   : null
 };
 
 //create context
@@ -31,12 +32,21 @@ export const GlobalProvider = ({ children }) => {
 		});
 	}
 
+	function setUser(user) {
+		dispatch({
+			type    : 'SET_USER',
+			payload : user
+		});
+	}
+
 	return (
 		<GlobalContext.Provider
 			value={{
 				basket           : state.basket,
+				user             : state.user,
 				addToBasket,
-				removeFromBasket
+				removeFromBasket,
+				setUser
 			}}
 		>
 			{children}
