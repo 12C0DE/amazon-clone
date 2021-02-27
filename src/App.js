@@ -8,6 +8,7 @@ import Login from './Pages/Login';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { GlobalContext } from './Context/GlobalState';
 import { auth } from './Firebase/firebase';
+import Payment from './Pages/Payment';
 
 //github repo: CleverProgrammers/react-challenge-amazon-clone
 
@@ -30,7 +31,6 @@ function App() {
 
 	//BEM
 	return (
-		// <GlobalProvider>
 		<Router>
 			<div className="App">
 				<Switch>
@@ -45,6 +45,10 @@ function App() {
 						<Header />
 						<Checkout />
 					</Route>
+					<Route exact path="/payment">
+						<Header />
+						<Payment />
+					</Route>
 					<Route path="/404">
 						<NotFound />
 					</Route>
@@ -52,7 +56,6 @@ function App() {
 				</Switch>
 			</div>
 		</Router>
-		// </GlobalProvider>
 	);
 }
 

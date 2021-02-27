@@ -3,6 +3,7 @@ import Subtotal from '../Components/Subtotal';
 import CheckoutProduct from '../Components/CheckoutProduct';
 import '../Styles/Checkout.css';
 import { GlobalContext } from '../Context/GlobalState';
+import FlipMove from 'react-flip-move';
 
 function Checkout() {
 	const { basket, user } = useContext(GlobalContext);
