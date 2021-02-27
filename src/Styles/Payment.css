@@ -14,9 +14,6 @@
 	text-decoration: none;
 }
 
-.payment_details {
-}
-
 .payment_section {
 	display: flex;
 	padding: 20px;
@@ -29,6 +26,7 @@
 }
 
 .payment_address,
-.payment_items {
+.payment_items,
+.payment_details {
 	flex: .8;
 }

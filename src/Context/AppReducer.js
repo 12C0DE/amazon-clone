@@ -8,6 +8,12 @@ export default (state, action) => {
 					action.payload
 				]
 			};
+		case 'GET_BASKET_TOTAL':
+			return {
+				...state,
+				basketTotal : state.basket.map((items) => items.price).reduce((amount, price) => price + amount, 0)
+				// value={basket.map((items) => items.price).reduce((amount, price) => price + amount, 0)}
+			};
 		case 'REMOVE_FROM_BASKET':
 			const index = state.basket.findIndex((basketItem) => basketItem.id === action.payload);
 			let newBasket = [

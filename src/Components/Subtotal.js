@@ -6,7 +6,7 @@ import '../Styles/Subtotal.css';
 
 function Subtotal() {
 	const history = useHistory();
-	const { basket } = useContext(GlobalContext);
+	const { basket, getBasketTotal } = useContext(GlobalContext);
 
 	return (
 		<div className="subtotal">
@@ -22,7 +22,7 @@ function Subtotal() {
 					</React.Fragment>
 				)}
 				decimalScale={2}
-				value={basket.map((items) => items.price).reduce((amount, price) => price + amount, 0)}
+				value={getBasketTotal}
 				displayType={'text'}
 				thousandSeparator={true}
 				prefix={'$'}
