@@ -8,6 +8,7 @@ function CheckoutProduct({ id, title, image, price, rating }) {
 	return (
 		<div className="checkoutProduct">
 			<img src={image} className="checkoutProduct_image" />
+
 			<div className="checkoutProduct_info">
 				<p className="checkoutProduct_title">{title}</p>
 				<p className="checkoutProduct_price">

@@ -5,11 +5,14 @@ import CheckoutProduct from '../Components/CheckoutProduct';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import axios from '../Axios/axios';
+import { db } from '../Firebase/firebase';
 import '../Styles/Payment.css';
 
 function Payment() {
-	const { basket, getBasketTotal, user } = useContext(GlobalContext);
+	const { basket, emptyBasket, user } = useContext(GlobalContext);
 	const history = useHistory();
+
+	const total = basket.map((items) => items.price).reduce((amount, price) => price + amount, 0);
 
 	const [
 		error,
@@ -44,7 +47,7 @@ function Payment() {
 					method : 'post',
 					//stripe expects the total in a currencies subunit
 					//if using dollars, the total needs to be in CENTS
-					url    : `/payment/create?total=${getBasketTotal * 100}`
+					url    : `/payments/create?total=${Math.round(total) * 100}`
 				});
 				setClientSecret(response.data.clientSecret);
 			};
@@ -54,6 +57,8 @@ function Payment() {
 			basket
 		]
 	);
+
+	console.log(`the client secret is: ${clientSecret}`);
 
 	const handleSubmit = async (e) => {
 		//do stripe stuff
@@ -66,9 +71,17 @@ function Payment() {
 			})
 			.then(({ paymentIntent }) => {
 				//paymentIntent = payment confirmation
+				db.collection('users').doc(user.uid).collection('orders').doc(paymentIntent.id).set({
+					basket  : basket,
+					amount  : paymentIntent.amount,
+					created : paymentIntent.created
+				});
+
 				setSucceeded(true);
 				setError(null);
 				setProcessing(false);
+
+				emptyBasket();
 
 				history.replace('/orders');
 			});
@@ -135,7 +148,7 @@ function Payment() {
 								<CurrencyFormat
 									renderText={(value) => <h3>Order Total: {value}</h3>}
 									decimalScale={2}
-									value={getBasketTotal}
+									value={total}
 									displayType="text"
 									thousandSeparator={true}
 									prefix={'$'}

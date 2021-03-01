@@ -3,7 +3,6 @@ import Subtotal from '../Components/Subtotal';
 import CheckoutProduct from '../Components/CheckoutProduct';
 import '../Styles/Checkout.css';
 import { GlobalContext } from '../Context/GlobalState';
-import FlipMove from 'react-flip-move';
 
 function Checkout() {
 	const { basket, user } = useContext(GlobalContext);
@@ -20,6 +19,7 @@ function Checkout() {
 					<h2 className="checkout_title">Your shopping basket</h2>
 					{basket.map((item, index) => (
 						<CheckoutProduct
+							key={`${item.id}_${index}`}
 							id={item.id}
 							title={item.title}
 							image={item.image}

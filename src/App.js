@@ -6,6 +6,7 @@ import Checkout from './Pages/Checkout';
 import NotFound from './Pages/NotFound';
 import Login from './Pages/Login';
 import Payment from './Pages/Payment';
+import Orders from './Pages/Orders';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { GlobalContext } from './Context/GlobalState';
 import { auth } from './Firebase/firebase';
@@ -50,6 +51,10 @@ function App() {
 					<Route exact path="/checkout">
 						<Header />
 						<Checkout />
+					</Route>
+					<Route exact path="/orders">
+						<Header />
+						<Orders />
 					</Route>
 					<Route exact path="/payment">
 						<Header />

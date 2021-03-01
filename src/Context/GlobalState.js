@@ -3,9 +3,9 @@ import AppReducer from './AppReducer';
 
 //inital state
 const initialState = {
-	basket : [],
-	basketTotal: 0,
-	user   : null
+	basket      : [],
+	basketTotal : 0,
+	user        : null
 };
 
 //create context
@@ -35,8 +35,15 @@ export const GlobalProvider = ({ children }) => {
 
 	function getBasketTotal() {
 		dispatch({
-			type: 'GET_BASKET_TOTAL',
-			payload: state.basket
+			type    : 'GET_BASKET_TOTAL',
+			payload : state.basket
+		});
+	}
+
+	function emptyBasket() {
+		dispatch({
+			type    : 'EMPTY_BASKET',
+			payload : []
 		});
 	}
 
@@ -51,9 +58,10 @@ export const GlobalProvider = ({ children }) => {
 		<GlobalContext.Provider
 			value={{
 				basket           : state.basket,
-				basketTotal: state.basketTotal,
+				basketTotal      : state.basketTotal,
 				user             : state.user,
 				addToBasket,
+				emptyBasket,
 				getBasketTotal,
 				removeFromBasket,
 				setUser

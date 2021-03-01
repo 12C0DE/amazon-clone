@@ -12,7 +12,6 @@ export default (state, action) => {
 			return {
 				...state,
 				basketTotal : state.basket.map((items) => items.price).reduce((amount, price) => price + amount, 0)
-				// value={basket.map((items) => items.price).reduce((amount, price) => price + amount, 0)}
 			};
 		case 'REMOVE_FROM_BASKET':
 			const index = state.basket.findIndex((basketItem) => basketItem.id === action.payload);
@@ -29,6 +28,11 @@ export default (state, action) => {
 			return {
 				...state,
 				basket : newBasket
+			};
+		case 'EMPTY_BASKET':
+			return {
+				...state,
+				basket : action.payload
 			};
 		case 'SET_USER':
 			return { ...state, user: action.payload };
